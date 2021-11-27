@@ -1,0 +1,8 @@
+
+
+
+Parser.builder()
+    .filter("ab:c")
+    .assertType("a", valuesT.STRING, "a parameter needs to be a string")
+    .parse(args)
+    .getAsMap();
