@@ -3,9 +3,9 @@ A java module to easily parse console arguments in a similar style as getOpt() i
 
 # Usage
 
-jParser provides a very simple console arguments parser abstraction. The main idea is to specify a filter, which is a string with all the parameters to expect. For example "apd" expects a, p and d parameters. Also if a parameter is followed by ":", it means that the parameter requires an argument.
+jParser provides a very simple console argument parser abstraction. The main idea is to specify a filter, which is a string with all the expected parameters. For example, "apd" expects parameters a, p and d. Also if a parameter is followed by ":", it means that the parameter requires an argument.
 
-It also comes with a handfull of methods to assert the result of the arguments.
+It also comes with various methods to assert the result of the arguments.
 
 ```java
 Map<Character, argument> argsMap = Parser.builder()
