@@ -1,6 +1,7 @@
 import io.github.divios.builder.parserCompleted;
 import io.github.divios.builder.values.valueType;
 import io.github.divios.Parser;
+import io.github.divios.utils.Primitives;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -47,6 +48,32 @@ public class testParser {
                     .assertType('p', valueType.INTEGER)
                     .parse(args);
         });
+    }
+
+    @Test
+    public void testParser_defaultValues() {
+        String[] args = {"-p", "3S", "-d", "-n"};
+
+        parserCompleted parser = Parser.builder()
+                .filter("p:ldnc")
+                .assertDefault('c', 30)
+                .parse(args);
+
+        Assertions.assertEquals(true, parser.getValue("n").getAsBoolean());
+        Assertions.assertEquals(30, parser.getValue('c').getAsInt());
+
+    }
+
+    @Test
+    public void testParser_assertThrow() {
+        String[] args = {"-p", "asdf", "-d", "-n"};
+
+        Assertions.assertThrows(Exception.class, () ->
+                Parser.builder()
+                        .filter("p:ldnc")
+                        .assertThrows('p', Primitives::getAsBoolean)
+                        .assertDefault('c', 30)
+                        .parse(args));
     }
 
 }

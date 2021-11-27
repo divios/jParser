@@ -1,6 +1,7 @@
 package io.github.divios.builder;
 
 import io.github.divios.builder.values.parserValue;
+import io.github.divios.utils.utils;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -11,15 +12,21 @@ public class parserCompletedImpl implements parserCompleted {
     private final String filter;
     private final Map<Character, Predicate<String>> assertFilters = new HashMap<>();
     private final Map<Character, parserValue> argsParsed = new HashMap<>();
+    private final Map<Character, parserValue> defaultValues = new HashMap<>();
 
     protected parserCompletedImpl(String[] args, String filter) {
         this(args, filter, Collections.emptyMap());
     }
 
     protected parserCompletedImpl(String[] args, String filter, Map<Character, Predicate<String>> assertFilters) {
-        this.args = List.of(args);
+        this(args, filter, assertFilters, Collections.emptyMap());
+    }
+
+    protected parserCompletedImpl(String[] args, String filter, Map<Character, Predicate<String>> assertFilters, Map<Character, parserValue> defaultValues) {
+        this.args = Arrays.asList(args);
         this.filter = filter;
         this.assertFilters.putAll(assertFilters);
+        this.defaultValues.putAll(defaultValues);
 
         parseArgs();
     }
@@ -75,6 +82,12 @@ public class parserCompletedImpl implements parserCompleted {
         });
 
         argsParsed.putAll(argsInputtedProcessed);
+
+        defaultValues.forEach((character, parserValue) -> {     // Put default value if null or empty
+            parserValue value = argsParsed.get(character);
+            if (value == null || !utils.testThrow(value::getAsObject))
+                argsParsed.put(character, parserValue);
+        });
 
     }
 

@@ -67,12 +67,7 @@ public class Primitives {
     }
 
     private static boolean testCast(Runnable runnable) {
-        try {
-            runnable.run();
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
+        return utils.testThrow(runnable);
     }
 
 }

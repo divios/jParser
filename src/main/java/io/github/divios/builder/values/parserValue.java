@@ -6,8 +6,14 @@ public class parserValue {
 
     private final String value;
 
+    public static parserValue EMPTY() { return new parserValue(); }
+
     public static parserValue ofString(String value) {
         return new parserValue(value);
+    }
+
+    private parserValue() {
+        value = null;
     }
 
     private parserValue(String value) {
@@ -36,6 +42,10 @@ public class parserValue {
 
     public char getAsChar() {
         return Primitives.getAsChar(value);
+    }
+
+    public Object getAsObject() {
+        return (Object) value;
     }
 
 }
