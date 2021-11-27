@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import utils.Primitives;
+import io.github.divios.utils.Primitives;
 
 public class testPrimitives {
 
@@ -37,7 +37,7 @@ public class testPrimitives {
     @Test
     public void testIsInteger_2() {
         String intToTest = "123S";
-        Assertions.assertEquals(true, Primitives.isInteger(intToTest));
+        Assertions.assertEquals(false, Primitives.isInteger(intToTest));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class testPrimitives {
     @Test
     public void testParseInteger_1() {
         String intToParse = "1234";
-        Assertions.assertEquals(1234, Primitives.isInteger(intToParse));
+        Assertions.assertEquals(1234, Primitives.getAsInteger(intToParse));
     }
 
     @Test
@@ -67,7 +67,7 @@ public class testPrimitives {
     @Test
     public void testParseLong_1() {
         String longParser = "1234";
-        Assertions.assertEquals(1234, longParser);
+        Assertions.assertEquals(1234, Primitives.getAsLong(longParser));
     }
 
     @Test

@@ -1,7 +1,6 @@
-package builder;
+package io.github.divios.builder;
 
-import builder.options.builderOptions;
-import builder.options.builderOptionsImpl;
+import io.github.divios.builder.options.builderOptions;
 
 public class builderImpl implements builder {
 

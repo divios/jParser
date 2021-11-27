@@ -1,8 +1,6 @@
-package builder.options;
+package io.github.divios.builder.options;
 
-import builder.parserCompleted;
-import builder.parserCompletedImpl;
-import builder.values.valueType;
+import io.github.divios.builder.parserCompleted;
 
 import java.util.HashMap;
 import java.util.Map;

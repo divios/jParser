@@ -1,6 +1,6 @@
-package builder;
+package io.github.divios.builder;
 
-import builder.values.parserValue;
+import io.github.divios.builder.values.parserValue;
 
 import java.util.*;
 import java.util.function.Predicate;

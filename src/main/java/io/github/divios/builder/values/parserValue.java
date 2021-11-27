@@ -1,6 +1,6 @@
-package builder.values;
+package io.github.divios.builder.values;
 
-import utils.Primitives;
+import io.github.divios.utils.Primitives;
 
 public class parserValue {
 

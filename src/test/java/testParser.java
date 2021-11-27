@@ -1,5 +1,6 @@
-import builder.parserCompleted;
-import builder.values.valueType;
+import io.github.divios.builder.parserCompleted;
+import io.github.divios.builder.values.valueType;
+import io.github.divios.Parser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,7 @@
 
 
 
-Parser.builder()
+io.github.divios.Parser.io.github.divios.builder()
     .filter("ab:c")
     .assertType("a", valuesT.STRING, "a parameter needs to be a string")
     .parse(args)

@@ -1,4 +1,4 @@
-package utils;
+package io.github.divios.utils;
 
 public class Primitives {
 

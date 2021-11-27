@@ -1,7 +1,7 @@
-package builder;
+package io.github.divios.builder;
 
-import builder.values.parserValue;
-import utils.Primitives;
+import io.github.divios.builder.values.parserValue;
+import io.github.divios.utils.Primitives;
 
 import java.util.Map;
 import java.util.function.Predicate;

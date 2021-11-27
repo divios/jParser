@@ -1,6 +1,6 @@
-package builder;
+package io.github.divios.builder;
 
-import builder.options.builderOptions;
+import io.github.divios.builder.options.builderOptions;
 
 public interface builder {
 

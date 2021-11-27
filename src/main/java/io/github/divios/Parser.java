@@ -1,4 +1,6 @@
-import builder.*;
+package io.github.divios;
+
+import io.github.divios.builder.*;
 
 import java.util.Map;
 import java.util.function.Predicate;
