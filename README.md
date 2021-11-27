@@ -1,2 +1,7 @@
 # jParser
-A java module to easily parse arguments, very similar to C style
+A java module to easily parse console arguments in a similar style as C with getOpt()
+
+# Instalation
+
+# Usage
+
