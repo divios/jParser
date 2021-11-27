@@ -17,7 +17,7 @@ Map<Character, argument> argsMap = Parser.builder()
       
 String host = argsMap.get('s').getAsString();
 int port = argsMap.get('p').getAsInt();
-boolean debug = argsMap.get('d).getAsBoolean();
+boolean debug = argsMap.get('d').getAsBoolean();
 
 ```
 
