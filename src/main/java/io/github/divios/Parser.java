@@ -1,9 +1,10 @@
 package io.github.divios;
 
-import io.github.divios.builder.*;
+import io.github.divios.builder.builder;
+import io.github.divios.builder.parserCompleted;
+import io.github.divios.builder.values.assertValue;
 
 import java.util.Map;
-import java.util.function.Predicate;
 
 public class Parser {
 
@@ -15,7 +16,7 @@ public class Parser {
         return parserCompleted.create(args, filter);
     }
 
-    public static parserCompleted parse(String[] args, String filter, Map<Character, Predicate<String>> filters){
+    public static parserCompleted parse(String[] args, String filter, Map<Character, assertValue> filters){
         return parserCompleted.create(args, filter, filters);
     }
 

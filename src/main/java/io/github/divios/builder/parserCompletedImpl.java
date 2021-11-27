@@ -1,16 +1,18 @@
 package io.github.divios.builder;
 
+import io.github.divios.builder.values.assertValue;
 import io.github.divios.builder.values.parserValue;
+import io.github.divios.exceptions.assertException;
+import io.github.divios.exceptions.unsatisfiedParameterException;
 import io.github.divios.utils.utils;
 
 import java.util.*;
-import java.util.function.Predicate;
 
 public class parserCompletedImpl implements parserCompleted {
 
     private final List<String> args;
     private final String filter;
-    private final Map<Character, Predicate<String>> assertFilters = new HashMap<>();
+    private final Map<Character, assertValue> assertFilters = new HashMap<>();
     private final Map<Character, parserValue> argsParsed = new HashMap<>();
     private final Map<Character, parserValue> defaultValues = new HashMap<>();
 
@@ -18,11 +20,11 @@ public class parserCompletedImpl implements parserCompleted {
         this(args, filter, Collections.emptyMap());
     }
 
-    protected parserCompletedImpl(String[] args, String filter, Map<Character, Predicate<String>> assertFilters) {
+    protected parserCompletedImpl(String[] args, String filter, Map<Character, assertValue> assertFilters) {
         this(args, filter, assertFilters, Collections.emptyMap());
     }
 
-    protected parserCompletedImpl(String[] args, String filter, Map<Character, Predicate<String>> assertFilters, Map<Character, parserValue> defaultValues) {
+    protected parserCompletedImpl(String[] args, String filter, Map<Character, assertValue> assertFilters, Map<Character, parserValue> defaultValues) {
         this.args = Arrays.asList(args);
         this.filter = filter;
         this.assertFilters.putAll(assertFilters);
@@ -71,14 +73,14 @@ public class parserCompletedImpl implements parserCompleted {
             }
             boolean needsParam = filterProcessed.get(entry.getKey());
             if (needsParam && entry.getValue() == null)
-                throw new RuntimeException("Param " + entry.getKey() + " needs a parameter");
+                throw new unsatisfiedParameterException("Param " + entry.getKey() + " needs a parameter");
             if (!needsParam) entry.setValue(parserValue.ofString("true"));
         }
 
-        assertFilters.forEach((character, stringPredicate) -> {         // Check asserts
+        assertFilters.forEach((character, assertValue) -> {         // Check asserts
             if (!argsInputtedProcessed.containsKey(character)) return;
-            if (!stringPredicate.test(argsInputtedProcessed.get(character).getAsString()))
-                throw new RuntimeException("Parameter " + character);
+            if (!assertValue.test(argsInputtedProcessed.get(character).getAsString()))
+                throw new assertException(assertValue.getErrorMsg());
         });
 
         argsParsed.putAll(argsInputtedProcessed);

@@ -19,13 +19,29 @@ public interface builderOptions {
     }
 
     default builderOptions assertType(Character s, valueType type) {
-        return assertTrue(s, type::test);
+        return assertType(s, type, "");
     }
 
-    builderOptions assertTrue(Character s, Predicate<String> test);
+    default builderOptions assertType(Character s, valueType type, String msgErr) {
+        return assertTrue(s, type::test, msgErr);
+    }
+
+    default builderOptions assertTrue(Character s, Predicate<String> test) {
+        return assertTrue(s, test, "");
+    }
+
+    builderOptions assertTrue(Character s, Predicate<String> test, String msgErr);
 
     default builderOptions assertThrows(Character s, Consumer<String> consumer) {
-        return assertTrue(s, s1 -> utils.testThrow(() -> consumer.accept(s1)));
+        return assertThrows(s, consumer, "");
+    }
+
+    default builderOptions assertThrows(Character s, Consumer<String> consumer, String msgErr) {
+        return assertTrue(s, s1 -> utils.testThrow(() -> consumer.accept(s1)), msgErr);
+    }
+
+    default builderOptions assertThrows(Character s, Runnable runnable, String msgErr) {
+        return assertThrows(s, s1 -> runnable.run(), msgErr);
     }
 
     default builderOptions assertThrows(Character s, Runnable runnable) {

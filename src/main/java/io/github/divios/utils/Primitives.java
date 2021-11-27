@@ -1,5 +1,7 @@
 package io.github.divios.utils;
 
+import io.github.divios.exceptions.primitiveFormatException;
+
 public class Primitives {
 
     public static boolean isShort(String s) {
@@ -7,7 +9,7 @@ public class Primitives {
     }
 
     public static short getAsShort(String s) {
-        if (!isShort(s)) throw new RuntimeException("String passed is not a short");
+        if (!isShort(s)) throw new primitiveFormatException("String passed is not a short");
         return Short.parseShort(s);
     }
 
@@ -16,7 +18,7 @@ public class Primitives {
     }
 
     public static int getAsInteger(String s) {
-        if (!isInteger(s)) throw new RuntimeException("String passed is not an integer");
+        if (!isInteger(s)) throw new primitiveFormatException("String passed is not an integer");
         return Integer.parseInt(s);
     }
 
@@ -25,7 +27,7 @@ public class Primitives {
     }
 
     public static float getAsFloat(String s) {
-        if (!isFloat(s)) throw new RuntimeException("String passed is not a float");
+        if (!isFloat(s)) throw new primitiveFormatException("String passed is not a float");
         return Float.parseFloat(s);
     }
 
@@ -34,7 +36,7 @@ public class Primitives {
     }
 
     public static double getAsDouble(String s) {
-        if (!isDouble(s)) throw new RuntimeException("String passed is not a double");
+        if (!isDouble(s)) throw new primitiveFormatException("String passed is not a double");
         return Double.parseDouble(s);
     }
 
@@ -43,7 +45,7 @@ public class Primitives {
     }
 
     public static long getAsLong(String s) {
-        if (!isLong(s)) throw new RuntimeException("String passed is not a Long");
+        if (!isLong(s)) throw new primitiveFormatException("String passed is not a Long");
         return Long.parseLong(s);
     }
 
@@ -52,7 +54,7 @@ public class Primitives {
     }
 
     public static char getAsChar(String s) {
-        if (!isChar(s)) throw new RuntimeException("String passed is not a char");
+        if (!isChar(s)) throw new primitiveFormatException("String passed is not a char");
         return s.charAt(0);
     }
 
@@ -62,7 +64,7 @@ public class Primitives {
     }
 
     public static boolean getAsBoolean(String s) {
-        if (!isBoolean(s)) throw new RuntimeException("String passed is not a boolean");
+        if (!isBoolean(s)) throw new primitiveFormatException("String passed is not a boolean");
         return Boolean.parseBoolean(s);
     }
 

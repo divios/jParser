@@ -8,6 +8,8 @@ public interface builder {
         return new builderImpl();
     }
 
-    builderOptions filter(String filter);
+    default builderOptions filter(String filter) {
+        return builderOptions.create(filter);
+    }
 
 }

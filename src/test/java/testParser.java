@@ -1,6 +1,9 @@
 import io.github.divios.builder.parserCompleted;
 import io.github.divios.builder.values.valueType;
 import io.github.divios.Parser;
+import io.github.divios.exceptions.assertException;
+import io.github.divios.exceptions.primitiveFormatException;
+import io.github.divios.exceptions.unsatisfiedParameterException;
 import io.github.divios.utils.Primitives;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -22,11 +25,11 @@ public class testParser {
     public void testParser_2() {
         String[] args = {"-p", "-d"};
         String filter = "p:ldn";
-        Assertions.assertThrows(Exception.class, () -> parserCompleted.create(args, filter));
+        Assertions.assertThrows(unsatisfiedParameterException.class, () -> parserCompleted.create(args, filter));
     }
 
     @Test
-    public void testParser_3() {
+    public void testParser_noParameter() {
         String[] args = {"-p", "3", "-d", "-n"};
 
         parserCompleted parser = Parser.builder()
@@ -39,10 +42,10 @@ public class testParser {
 
 
     @Test
-    public void testParser_4() {
+    public void testParser_testAssrtType() {
         String[] args = {"-p", "3S", "-d", "-n"};
 
-        Assertions.assertThrows(Exception.class, () -> {
+        Assertions.assertThrows(assertException.class, () -> {
             Parser.builder()
                     .filter("p:ldn")
                     .assertType('p', valueType.INTEGER)
