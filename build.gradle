@@ -1,5 +1,5 @@
 plugins {
-    id 'java-library'
+    id 'java'
     id "maven-publish"
 }
 
@@ -28,6 +28,4 @@ publishing {
     }
 }
 
-jar.configure {
-    actions.clear()
-}
+compileJava.dependsOn(clean)
