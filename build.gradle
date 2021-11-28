@@ -3,6 +3,11 @@ plugins {
     id "maven-publish"
 }
 
+group = 'com.github.divios'
+
+sourceCompatibility = 1.8 // java 8
+targetCompatibility = 1.8
+
 repositories {
     mavenCentral()
     mavenLocal()
