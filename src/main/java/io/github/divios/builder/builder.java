@@ -12,4 +12,12 @@ public interface builder {
         return builderOptions.create(filter);
     }
 
+    default builderOptions filter(String ...filters) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String filter : filters) {
+            stringBuilder.append(filter);
+        }
+        return filter(stringBuilder.toString());
+    }
+
 }
