@@ -1,4 +1,4 @@
-# jParser
+# jParser [![](https://jitpack.io/v/divios/jparser.svg)](https://jitpack.io/#divios/jparser)
 A java module to easily parse console arguments in a similar style as getOpt() in C
 
 # Usage
