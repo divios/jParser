@@ -1,8 +1,8 @@
 package io.github.divios.builder.options;
 
-import io.github.divios.builder.parserCompleted;
+import io.github.divios.builder.parser;
 import io.github.divios.builder.values.assertValue;
-import io.github.divios.builder.values.parserValue;
+import io.github.divios.builder.values.argument;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +12,7 @@ public class builderOptionsImpl implements builderOptions {
 
     private final String filter;
     private final Map<Character, assertValue> assertList = new HashMap();
-    private final Map<Character, parserValue> defaultValues = new HashMap<>();
+    private final Map<Character, argument> defaultValues = new HashMap<>();
 
     protected builderOptionsImpl(String filter) {
         this.filter = filter;
@@ -26,13 +26,13 @@ public class builderOptionsImpl implements builderOptions {
 
     @Override
     public builderOptions assertDefault(Character s, String defaultValue) {
-        defaultValues.put(s, parserValue.ofString(defaultValue));
+        defaultValues.put(s, argument.ofString(defaultValue));
         return this;
     }
 
     @Override
-    public parserCompleted parse(String[] args) {
-        return parserCompleted.create(args, filter, assertList, defaultValues);
+    public parser parse(String[] args) {
+        return parser.create(args, filter, assertList, defaultValues);
     }
 
 }

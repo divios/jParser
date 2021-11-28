@@ -1,30 +1,30 @@
 package io.github.divios.builder;
 
 import io.github.divios.builder.values.assertValue;
-import io.github.divios.builder.values.parserValue;
+import io.github.divios.builder.values.argument;
 import io.github.divios.exceptions.assertException;
 import io.github.divios.exceptions.unsatisfiedParameterException;
-import io.github.divios.utils.utils;
+import io.github.divios.utils.Utils;
 
 import java.util.*;
 
-public class parserCompletedImpl implements parserCompleted {
+public class parserImpl implements parser {
 
     private final List<String> args;
     private final String filter;
     private final Map<Character, assertValue> assertFilters = new HashMap<>();
-    private final Map<Character, parserValue> argsParsed = new HashMap<>();
-    private final Map<Character, parserValue> defaultValues = new HashMap<>();
+    private final Map<Character, argument> argsParsed = new HashMap<>();
+    private final Map<Character, argument> defaultValues = new HashMap<>();
 
-    protected parserCompletedImpl(String[] args, String filter) {
+    protected parserImpl(String[] args, String filter) {
         this(args, filter, Collections.emptyMap());
     }
 
-    protected parserCompletedImpl(String[] args, String filter, Map<Character, assertValue> assertFilters) {
+    protected parserImpl(String[] args, String filter, Map<Character, assertValue> assertFilters) {
         this(args, filter, assertFilters, Collections.emptyMap());
     }
 
-    protected parserCompletedImpl(String[] args, String filter, Map<Character, assertValue> assertFilters, Map<Character, parserValue> defaultValues) {
+    protected parserImpl(String[] args, String filter, Map<Character, assertValue> assertFilters, Map<Character, argument> defaultValues) {
         this.args = Arrays.asList(args);
         this.filter = filter;
         this.assertFilters.putAll(assertFilters);
@@ -34,12 +34,12 @@ public class parserCompletedImpl implements parserCompleted {
     }
 
     @Override
-    public parserValue getValue(char value) {
+    public argument getValue(char value) {
         return argsParsed.get(value);
     }
 
     @Override
-    public Map<Character, parserValue> getAsMap() {
+    public Map<Character, argument> getAsMap() {
         return Collections.unmodifiableMap(argsParsed);
     }
 
@@ -53,20 +53,20 @@ public class parserCompletedImpl implements parserCompleted {
             else filterProcessed.put(c, false);
         }
 
-        Map<Character, parserValue> argsInputtedProcessed = new HashMap<>();   // Formats the args inputted
+        Map<Character, argument> argsInputtedProcessed = new HashMap<>();   // Formats the args inputted
         for (int i = 0; i < args.size(); i++) {
             String arg = args.get(i);
             if (!arg.startsWith("-")) continue;
             char parameterIndie = arg.substring(1).charAt(0);
             if (i != args.size() - 1 && !args.get(i + 1).startsWith("-"))
-                argsInputtedProcessed.put(parameterIndie, parserValue.ofString(args.get(i + 1)));
+                argsInputtedProcessed.put(parameterIndie, argument.ofString(args.get(i + 1)));
             else
                 argsInputtedProcessed.put(parameterIndie, null);
         }
 
         // Check if parameters inputted check filters
-        for (Iterator<Map.Entry<Character, parserValue>> iter = argsInputtedProcessed.entrySet().iterator(); iter.hasNext(); ) {
-            Map.Entry<Character, parserValue> entry = iter.next();
+        for (Iterator<Map.Entry<Character, argument>> iter = argsInputtedProcessed.entrySet().iterator(); iter.hasNext(); ) {
+            Map.Entry<Character, argument> entry = iter.next();
             if (!filterProcessed.containsKey(entry.getKey())) {
                 iter.remove();
                 continue;
@@ -74,7 +74,7 @@ public class parserCompletedImpl implements parserCompleted {
             boolean needsParam = filterProcessed.get(entry.getKey());
             if (needsParam && entry.getValue() == null)
                 throw new unsatisfiedParameterException("Param " + entry.getKey() + " needs a parameter");
-            if (!needsParam) entry.setValue(parserValue.ofString("true"));
+            if (!needsParam) entry.setValue(argument.ofString("true"));
         }
 
         assertFilters.forEach((character, assertValue) -> {         // Check asserts
@@ -85,10 +85,10 @@ public class parserCompletedImpl implements parserCompleted {
 
         argsParsed.putAll(argsInputtedProcessed);
 
-        defaultValues.forEach((character, parserValue) -> {     // Put default value if null or empty
-            parserValue value = argsParsed.get(character);
-            if (value == null || !utils.testThrow(value::getAsObject))
-                argsParsed.put(character, parserValue);
+        defaultValues.forEach((character, argument) -> {     // Put default value if null or empty
+            argument value = argsParsed.get(character);
+            if (value == null || !Utils.testThrow(value::getAsObject))
+                argsParsed.put(character, argument);
         });
 
     }

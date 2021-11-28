@@ -1,7 +1,7 @@
 package io.github.divios;
 
 import io.github.divios.builder.builder;
-import io.github.divios.builder.parserCompleted;
+import io.github.divios.builder.parser;
 import io.github.divios.builder.values.assertValue;
 
 import java.util.Map;
@@ -12,12 +12,12 @@ public class Parser {
         return builder.create();
     }
 
-    public static parserCompleted parse(String[] args, String filter) {
-        return parserCompleted.create(args, filter);
+    public static parser parse(String[] args, String filter) {
+        return parser.create(args, filter);
     }
 
-    public static parserCompleted parse(String[] args, String filter, Map<Character, assertValue> filters){
-        return parserCompleted.create(args, filter, filters);
+    public static parser parse(String[] args, String filter, Map<Character, assertValue> filters){
+        return parser.create(args, filter, filters);
     }
 
 }

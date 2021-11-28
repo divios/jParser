@@ -2,21 +2,21 @@ package io.github.divios.builder.values;
 
 import io.github.divios.utils.Primitives;
 
-public class parserValue {
+public class argument {
 
     private final String value;
 
-    public static parserValue EMPTY() { return new parserValue(); }
+    public static argument EMPTY() { return new argument(); }
 
-    public static parserValue ofString(String value) {
-        return new parserValue(value);
+    public static argument ofString(String value) {
+        return new argument(value);
     }
 
-    private parserValue() {
+    private argument() {
         value = null;
     }
 
-    private parserValue(String value) {
+    private argument(String value) {
         this.value = value;
     }
 

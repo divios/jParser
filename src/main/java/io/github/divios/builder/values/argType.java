@@ -4,7 +4,7 @@ import io.github.divios.utils.Primitives;
 
 import java.util.function.Predicate;
 
-public enum valueType {
+public enum argType {
 
     STRING(s -> true),
     INTEGER(Primitives::isInteger),
@@ -15,7 +15,7 @@ public enum valueType {
 
     private final Predicate<String> test;
 
-    valueType(Predicate<String> test) {
+    argType(Predicate<String> test) {
         this.test = test;
     }
 

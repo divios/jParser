@@ -1,8 +1,8 @@
 package io.github.divios.builder.options;
 
-import io.github.divios.builder.parserCompleted;
-import io.github.divios.builder.values.valueType;
-import io.github.divios.utils.utils;
+import io.github.divios.builder.parser;
+import io.github.divios.builder.values.argType;
+import io.github.divios.utils.Utils;
 
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -18,11 +18,11 @@ public interface builderOptions {
         return new builderOptionsImpl(filter);
     }
 
-    default builderOptions assertType(Character s, valueType type) {
+    default builderOptions assertType(Character s, argType type) {
         return assertType(s, type, "");
     }
 
-    default builderOptions assertType(Character s, valueType type, String msgErr) {
+    default builderOptions assertType(Character s, argType type, String msgErr) {
         return assertTrue(s, type::test, msgErr);
     }
 
@@ -37,7 +37,7 @@ public interface builderOptions {
     }
 
     default builderOptions assertThrows(Character s, Consumer<String> consumer, String msgErr) {
-        return assertTrue(s, s1 -> utils.testThrow(() -> consumer.accept(s1)), msgErr);
+        return assertTrue(s, s1 -> Utils.testThrow(() -> consumer.accept(s1)), msgErr);
     }
 
     default builderOptions assertThrows(Character s, Runnable runnable, String msgErr) {
@@ -74,6 +74,6 @@ public interface builderOptions {
         return assertDefault(s, String.valueOf(defaultValue));
     }
 
-    parserCompleted parse(String[] args);
+    parser parse(String[] args);
 
 }

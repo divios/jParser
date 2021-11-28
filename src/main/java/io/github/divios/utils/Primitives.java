@@ -69,7 +69,7 @@ public class Primitives {
     }
 
     private static boolean testCast(Runnable runnable) {
-        return utils.testThrow(runnable);
+        return Utils.testThrow(runnable);
     }
 
 }
