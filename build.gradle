@@ -3,10 +3,9 @@ plugins {
     id "maven-publish"
 }
 
-group 'io.github.divios'
-
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
@@ -24,9 +23,11 @@ publishing {
             groupId = 'com.github.divios'
             artifactId = rootProject.name
             version = '1.0'
-            artifact ("build/libs/jParser.jar")
+            artifact("build/libs/jParser.jar")
         }
     }
 }
 
-compileJava.dependsOn clean
+jar.configure {
+    actions.clear()
+}
