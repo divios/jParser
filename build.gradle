@@ -11,6 +11,7 @@ targetCompatibility = 1.8
 repositories {
     mavenCentral()
     mavenLocal()
+    maven { url = "https://jitpack.io" }
 }
 
 dependencies {
@@ -20,17 +21,6 @@ dependencies {
 
 test {
     useJUnitPlatform()
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId = 'com.github.divios'
-            artifactId = rootProject.name
-            version = '1.0'
-            artifact("build/libs/jParser.jar")
-        }
-    }
 }
 
 compileJava.dependsOn(clean)
