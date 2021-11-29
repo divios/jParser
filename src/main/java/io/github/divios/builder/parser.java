@@ -1,7 +1,7 @@
 package io.github.divios.builder;
 
+import io.github.divios.builder.values.Argument;
 import io.github.divios.builder.values.assertValue;
-import io.github.divios.builder.values.argument;
 import io.github.divios.utils.Primitives;
 
 import java.util.Collections;
@@ -17,7 +17,7 @@ public interface parser {
         return create(args, filter, filters, Collections.emptyMap());
     }
 
-    static parser create(String[] args, String filter, Map<Character, assertValue> filters, Map<Character, argument> defaultValues) {
+    static parser create(String[] args, String filter, Map<Character, assertValue> filters, Map<Character, Argument> defaultValues) {
         return new parserImpl(args, filter, filters, defaultValues);
     }
 
@@ -25,12 +25,12 @@ public interface parser {
         return getValue(value) != null;
     }
 
-    default argument getValue(String value) {
+    default Argument getValue(String value) {
         return getValue(Primitives.getAsChar(value));
     }
 
-    argument getValue(char value);
+    Argument getValue(char value);
 
-    Map<Character, argument> getAsMap();
+    Map<Character, Argument> getAsMap();
 
 }

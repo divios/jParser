@@ -1,22 +1,25 @@
 package io.github.divios.builder.values;
 
 import io.github.divios.utils.Primitives;
+import io.github.divios.utils.Utils;
 
-public class argument {
+import java.util.Optional;
+
+public class Argument {
 
     private final String value;
 
-    public static argument EMPTY() { return new argument(); }
+    public static Argument EMPTY() { return new Argument(); }
 
-    public static argument ofString(String value) {
-        return new argument(value);
+    public static Argument ofString(String value) {
+        return new Argument(value);
     }
 
-    private argument() {
+    private Argument() {
         value = null;
     }
 
-    private argument(String value) {
+    private Argument(String value) {
         this.value = value;
     }
 
@@ -46,6 +49,11 @@ public class argument {
 
     public Object getAsObject() {
         return (Object) value;
+    }
+
+    public <T> Optional<T> parse(Class<T> clazz) {
+        if (value == null || !Utils.testThrow(() -> clazz.cast(value))) return Optional.empty();
+        return Optional.of(clazz.cast(value));
     }
 
 }

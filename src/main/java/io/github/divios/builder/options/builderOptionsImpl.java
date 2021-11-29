@@ -2,7 +2,7 @@ package io.github.divios.builder.options;
 
 import io.github.divios.builder.parser;
 import io.github.divios.builder.values.assertValue;
-import io.github.divios.builder.values.argument;
+import io.github.divios.builder.values.Argument;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +12,7 @@ public class builderOptionsImpl implements builderOptions {
 
     private final String filter;
     private final Map<Character, assertValue> assertList = new HashMap();
-    private final Map<Character, argument> defaultValues = new HashMap<>();
+    private final Map<Character, Argument> defaultValues = new HashMap<>();
 
     protected builderOptionsImpl(String filter) {
         this.filter = filter;
@@ -26,7 +26,7 @@ public class builderOptionsImpl implements builderOptions {
 
     @Override
     public builderOptions assertDefault(Character s, String defaultValue) {
-        defaultValues.put(s, argument.ofString(defaultValue));
+        defaultValues.put(s, Argument.ofString(defaultValue));
         return this;
     }
 

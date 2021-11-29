@@ -32,12 +32,20 @@ public interface builderOptions {
 
     builderOptions assertTrue(Character s, Predicate<String> test, String msgErr);
 
+    default builderOptions assertFalse(Character s, Predicate<String> test, String msgErr) {
+        return assertTrue(s, test.negate(), msgErr);
+    }
+
+    default builderOptions assertFalse(Character s, Predicate<String> test) {
+        return assertFalse(s, test, "");
+    }
+
     default builderOptions assertThrows(Character s, Consumer<String> consumer) {
         return assertThrows(s, consumer, "");
     }
 
     default builderOptions assertThrows(Character s, Consumer<String> consumer, String msgErr) {
-        return assertTrue(s, s1 -> Utils.testThrow(() -> consumer.accept(s1)), msgErr);
+        return assertFalse(s, s1 -> Utils.testThrow(() -> consumer.accept(s1)), msgErr);
     }
 
     default builderOptions assertThrows(Character s, Runnable runnable, String msgErr) {
@@ -46,6 +54,22 @@ public interface builderOptions {
 
     default builderOptions assertThrows(Character s, Runnable runnable) {
         return assertThrows(s, s1 -> runnable.run());
+    }
+
+    default builderOptions assertNoThrows(Character s, Consumer<String> consumer, String msgErr) {
+        return assertTrue(s, s1 -> Utils.testThrow(() -> consumer.accept(s1)), msgErr);
+    }
+
+    default builderOptions assertNoThrows(Character s, Consumer<String> consumer) {
+        return assertNoThrows(s, consumer, "");
+    }
+
+    default builderOptions assertNoThrows(Character s, Runnable runnable, String msgErr) {
+        return assertNoThrows(s, s1 -> runnable.run(), msgErr);
+    }
+
+    default builderOptions assertNoThrows(Character s, Runnable runnable) {
+        return assertNoThrows(s, runnable, "");
     }
 
     builderOptions assertDefault(Character s, String defaultValue);

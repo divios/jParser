@@ -4,6 +4,7 @@ import io.github.divios.Parser;
 import io.github.divios.exceptions.assertException;
 import io.github.divios.exceptions.unsatisfiedParameterException;
 import io.github.divios.utils.Primitives;
+import io.github.divios.utils.Utils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,8 +17,8 @@ public class testParser {
         parser parser = io.github.divios.builder.parser.create(args, filter);
 
         Assertions.assertEquals(3, parser.getValue('p').getAsInt());
-        Assertions.assertEquals(true, parser.getValue('d').getAsBoolean());
-        Assertions.assertEquals(null, parser.getValue('c'));
+        Assertions.assertTrue(parser.getValue('d').getAsBoolean());
+        Assertions.assertNull(parser.getValue('c'));
     }
 
     @Test
@@ -53,6 +54,18 @@ public class testParser {
     }
 
     @Test
+    public void testParser_testNoAssertType() {
+        String[] args = {"-p", "3", "-d", "-n"};
+
+        Assertions.assertDoesNotThrow(() -> {
+            Parser.builder()
+                    .filter("p:ldn")
+                    .assertNoThrows('p', Integer::parseInt)
+                    .parse(args);
+        });
+    }
+
+    @Test
     public void testParser_defaultValues() {
         String[] args = {"-p", "3S", "-d", "-n"};
 
@@ -73,9 +86,22 @@ public class testParser {
         Assertions.assertThrows(Exception.class, () ->
                 Parser.builder()
                         .filter("p:ldnc")
-                        .assertThrows('p', Primitives::getAsBoolean)
+                        .assertNoThrows('p', Primitives::getAsBoolean)
                         .assertDefault('c', 30)
                         .parse(args));
     }
+
+    /*@Test
+    public void testParser_assertClass() {
+        String[] args = {"-p", "3", "-d", "-n"};
+
+        parser parser = Parser.builder()
+                .filter("p:ldn")
+                .assertType('p', argType.INTEGER)
+                .parse(args);
+
+        int port = parser.getValue('p').parse(Integer.class).orElse(5);
+        Assertions.assertEquals(3, Integer.class.cast("3"));
+    } */
 
 }
