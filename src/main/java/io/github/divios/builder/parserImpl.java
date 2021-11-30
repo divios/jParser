@@ -43,7 +43,7 @@ public class parserImpl implements parser {
         return Collections.unmodifiableMap(argsParsed);
     }
 
-    private void parseArgs() {
+    final void parseArgs() {
         Map<Character, Boolean> filterProcessed = new HashMap<>();    // Get filters and store it in a map, the value represents if it needs a parameter
         for (int i = 0; i < filter.length(); i++) {
             char c = filter.charAt(i);
@@ -51,6 +51,7 @@ public class parserImpl implements parser {
             if (i != filter.length() - 1 && filter.charAt(i + 1) == ':')
                 filterProcessed.put(c, true);
             else filterProcessed.put(c, false);
+            argsParsed.put(c, Argument.EMPTY());        // Add an empty default value
         }
 
         Map<Character, Argument> argsInputtedProcessed = new HashMap<>();   // Formats the args inputted
@@ -87,7 +88,7 @@ public class parserImpl implements parser {
 
         defaultValues.forEach((character, Argument) -> {     // Put default value if null or empty
             Argument value = argsParsed.get(character);
-            if (value == null || !Utils.testThrow(value::getAsObject))
+            if (value == null || value.getAsObject() == null)
                 argsParsed.put(character, Argument);
         });
 

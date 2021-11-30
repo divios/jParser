@@ -5,6 +5,7 @@ import io.github.divios.utils.Utils;
 
 import java.util.Optional;
 
+@SuppressWarnings("unused")
 public class Argument {
 
     private final String value;
@@ -48,12 +49,40 @@ public class Argument {
     }
 
     public Object getAsObject() {
-        return (Object) value;
+        return value;
     }
 
     public <T> Optional<T> parse(Class<T> clazz) {
         if (value == null || !Utils.testThrow(() -> clazz.cast(value))) return Optional.empty();
         return Optional.of(clazz.cast(value));
+    }
+
+    public String getAsStringOrDefault(String defVal) {
+        return value == null ? defVal : value;
+    }
+
+    public int getAsIntOrDefault(int defVal) {
+        return Utils.testOrDefault(this::getAsInt, defVal);
+    }
+
+    public double getAsDoubleOrDefault(double defVal) {
+        return Utils.testOrDefault(this::getAsDouble, defVal);
+    }
+
+    public long getAsLongOrDefault(long defVal) {
+        return Utils.testOrDefault(this::getAsLong, defVal);
+    }
+
+    public boolean getAsBooleanOrDefault(boolean defVal) {
+        return Utils.testOrDefault(this::getAsBoolean, defVal);
+    }
+
+    public char getAsCharOrDefault(char defVal) {
+        return Utils.testOrDefault(this::getAsChar, defVal);
+    }
+
+    public Object getAsObjectOrDefault(Object defVal) {
+        return value == null ? defVal : value;
     }
 
 }

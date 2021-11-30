@@ -1,5 +1,7 @@
 package io.github.divios.utils;
 
+import java.util.function.Supplier;
+
 public class Utils {
 
     public static boolean testThrow(Runnable runnable) {
@@ -9,6 +11,14 @@ public class Utils {
             return false;
         }
         return true;
+    }
+
+    public static <T> T testOrDefault(Supplier<T> supplier, T defVal) {
+        try {
+            return supplier.get();
+        } catch (Exception e) {
+            return defVal;
+        }
     }
 
 }
