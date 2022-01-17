@@ -44,7 +44,7 @@ public class parserImpl implements parser {
     }
 
     final void parseArgs() {
-        Map<Character, Boolean> filterProcessed = new HashMap<>();    // Get filters and store it in a map, the value represents if it needs a parameter
+        Map<Character, Boolean> filterProcessed = new HashMap<>();    // Get filters and store it in a map, the value represents if a parameter is needed
         for (int i = 0; i < filter.length(); i++) {
             char c = filter.charAt(i);
             if (c == ':') continue;

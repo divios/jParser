@@ -3,7 +3,7 @@ plugins {
     id "maven-publish"
 }
 
-group = 'com.github.divios'
+group = 'io.github.divios'
 
 sourceCompatibility = 1.8 // java 8
 targetCompatibility = 1.8
@@ -26,9 +26,8 @@ test {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            groupId = 'com.github.divios'
+            groupId = group
             artifactId = 'jParser'
-            version = '1.0'
 
             from components.java
         }
