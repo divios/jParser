@@ -67,7 +67,7 @@ For Windows, use Git Bash. For Linux or OSX, just ensure you have Git installed.
 
 ```
 git clone https://github.com/divios/jparser
-cd RedLib
+cd jParser
 ./gradlew jar
 ```
 
